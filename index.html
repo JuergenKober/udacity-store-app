@@ -21,6 +21,11 @@
     </div>
 
     <script type="text/javascript">
+      // helper function to generate id
+      function generateId () {
+        return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+      }
+
       // Library code
       function createStore(reducer) {
         // The store should have four parts
@@ -135,6 +140,30 @@
       store.subscribe(() => {
         console.log('The new state is ', store.getState());
       });
+
+      function addTodo() {
+        const input = document.getElementById('todo');
+        const name = input.value;
+        input.value = '';
+
+        store.dispatch(addTodoAction({
+          name,
+          complete: false,
+          id: generateId()
+        }));
+      }
+
+      function addGoal() {
+        const input = document.getElementById('goal');
+        const name = input.value;
+        input.value = '';
+
+        store.dispatch(addGoalAction({
+          name,
+          complete: false,
+          id: generateId()
+        }));
+      }
 
       // store.dispatch(addTodoAction({
       //     id: 0,
