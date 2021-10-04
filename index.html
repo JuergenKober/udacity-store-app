@@ -164,6 +164,12 @@
         }));
       }
 
+      document.getElementById('todoBtn')
+        .addEventListener('click', addTodo);
+
+      document.getElementById('goalBtn')
+        .addEventListener('click', addGoal);
+
       // store.dispatch(addTodoAction({
       //     id: 0,
       //     name: 'Learn Redux',
