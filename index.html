@@ -148,6 +148,7 @@
         todos.forEach(addTodoToDOM)
       });
 
+      // DOM code
       function addTodo() {
         const input = document.getElementById('todo');
         const name = input.value;
@@ -177,6 +178,13 @@
       document.getElementById('goalBtn')
         .addEventListener('click', addGoal);
 
+      function createRemoveButton(onClick) {
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = 'X';
+        removeBtn.addEventListener('click', onClick);
+        return removeBtn;
+      }
+
       function addTodoToDOM (todo) {
         const node = document.createElement('li');
         const text = document.createTextNode(todo.name);
@@ -198,7 +206,7 @@
         document.getElementById('goals')
           .append(node)
       }
-      
+
       // store.dispatch(addTodoAction({
       //     id: 0,
       //     name: 'Learn Redux',
