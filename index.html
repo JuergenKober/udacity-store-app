@@ -71,6 +71,16 @@
           goals,
         }
       }
+
+      function handleDeleteTodo(todo) {
+        this.props.store.dispatch(removeTodoAction(todo.id));
+        return API.deleteTodo(todo.id)
+          .catch(() => {
+            this.props.store.dispatch(addTodoAction(todo));
+            alert('An error occured. Please try again.')
+          })
+      }
+
       // reducer function
       function todos(state=[], action) {
         switch(action.type) {
@@ -186,12 +196,7 @@
         }
 
         removeItem = (todo) => {
-          this.props.store.dispatch(removeTodoAction(todo.id));
-          return API.deleteTodo(todo.id)
-            .catch(() => {
-              this.props.store.dispatch(addTodoAction(todo));
-              alert('An error occured. Please try again.')
-            })
+          this.props.store.dispatch(handleDeleteTodo(todo));
         }
 
         toggleItem = (id) => {
