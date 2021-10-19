@@ -188,6 +188,7 @@
           return API.deleteTodo(todo.id)
             .then(() => {
               this.props.store.dispatch(addTodoAction(todo));
+              alert('An error occured. Please try again.')
             })
         }
 
