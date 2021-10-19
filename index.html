@@ -73,12 +73,14 @@
       }
 
       function handleDeleteTodo(todo) {
-        this.props.store.dispatch(removeTodoAction(todo.id));
-        return API.deleteTodo(todo.id)
-          .catch(() => {
-            this.props.store.dispatch(addTodoAction(todo));
-            alert('An error occured. Please try again.')
-          })
+        return (dispatch) => {
+          dispatch(removeTodoAction(todo.id));
+          return API.deleteTodo(todo.id)
+            .catch(() => {
+              dispatch(addTodoAction(todo));
+              alert('An error occured. Please try again.')
+            })
+        }
       }
 
       // reducer function
@@ -150,12 +152,19 @@
         return result;
       }
 
+      const thunk = (store) => (next) => (action) => {
+        if (typeof action === 'function') {
+          return action(store.dispatch);
+        }
+        return next(action);
+      }
+
       //const store = createStore(app);
       const store = Redux.createStore(Redux.combineReducers({
         todos,
         goals,
         loading
-      }), Redux.applyMiddleware(checker, logger));
+      }), Redux.applyMiddleware(thunk, checker, logger));
 
     </script>
     <script type="text/babel">
