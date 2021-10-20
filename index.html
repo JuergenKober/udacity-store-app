@@ -251,16 +251,6 @@
             this.input.value,
             () => this.input.value = ''
           ))
-/***
-          return API.saveTodo(this.input.value)
-            .then((todo) => {
-              this.props.store.dispatch(addTodoAction(todo));
-              this.input.value = '';
-            })
-            .catch(() => {
-              alert('An error occured. Please try again.')
-            });
-            ***/
         }
 
         removeItem = (todo) => {
@@ -269,15 +259,6 @@
 
         toggleItem = (id) => {
           this.props.store.dispatch(handleToggle(id));
-                   /***
-          this.props.store.dispatch(toggleTodoAction(id))
-
-          return API.saveTodoToggle(id)
-            .catch(() => {
-              this.props.store.dispatch(toggleTodoAction(id));
-              alert('An error occured. Please try again.')
-            })
-          ***/
         }
 
         render() {
@@ -305,32 +286,15 @@
 
         addItem = (e) => {
           e.preventDefault();
-/***
-          return API.saveGoal(this.input.value)
-            .then((goal) => {
-              this.props.store.dispatch(addGoalAction(goal));
-              this.input.value = '';
-            })
-            .catch(() => {
-              alert('An error occured. Please try again.')
-            });
-            ***/
-            this.props.store.dispatch(handleAddGoal(
-              this.input.value,
-              () => this.input.value = ''
-            ))
+
+          this.props.store.dispatch(handleAddGoal(
+            this.input.value,
+            () => this.input.value = ''
+          ))
         }
 
         removeItem = (goal) => {
           this.props.store.dispatch(handleDeleteGoal(goal));
-          /***
-          this.props.store.dispatch(removeGoalAction(goal.id));
-          return API.deleteGoal(goal.id)
-            .catch(() => {
-              this.props.store.dispatch(addGoalAction(goal));
-              alert('An error occured. Please try again.')
-          })
-          ***/
         }
 
         render() {
@@ -358,14 +322,6 @@
           const { store } = this.props;
 
           store.dispatch(handleInitialData());
-/***
-          Promise.all([
-            API.fetchTodos(),
-            API.fetchGoals()
-          ]).then(([ todos, goals ]) => {
-            store.dispatch(receiveDataAction(todos, goals))
-          });
-***/
 
           store.subscribe(() => this.forceUpdate());
         }
